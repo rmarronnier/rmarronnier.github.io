@@ -161,4 +161,33 @@ SELECT
     *
 FROM
     clients
-ORDER BY PAYS, VILLE
+
+    -----------------
+
+
+    **Les cardinalités servent à définir les contraintes d'intégrité sur l'association**
+
+    -------------------
+
+    1. Affichez le nom, prénom, fonction et salaire des employés qui ont un salaire compris entre 2500 et 3500
+
+    SELECT NOM, PRENOM, FONCTION, SALAIRE
+    FROM employes
+    WHERE 2500<SALAIRE<3500
+
+    2. Affichez le nom du produit, le nom du fournisseur, le nom de la catégorie et les quantités de produits qui ne sont pas d'une des catégories 1, 3, 5 et 7
+
+    SELECT
+        produits.NOM_PRODUIT,
+        fournisseurs.SOCIETE,
+        categories.NOM_CATEGORIE,
+        produits.QUANTITE
+    FROM
+        produits,
+    INNER JOIN fournisseur
+    ON produit.NO_FOURNISSEUR = fournisseur.NO_FOURNISSEUR
+    INNER JOIN categorie
+    ON produit.code_categorie = categorie.code_categorie
+
+
+    3. Affichez le nom du produit, le le nom du fournisseur, le nom de la catégorie et les quantités des produits qui ont le numéro fournisseur entre 1 et 3 ou un code catégorie entre 1 et 3, et pour lesquelles les quantités sont données en boîtes ou en cartons.
