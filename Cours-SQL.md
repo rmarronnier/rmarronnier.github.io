@@ -75,6 +75,7 @@ FROM employes
 Employé                 a un                 gain annuel        sur 12 mois
 -------                 -------             --------------      ------------
 Fuller                  gagne               12000               par an.
+
 `<
 SELECT
     concat(nom," ", prenom) as Employé,
@@ -84,3 +85,80 @@ SELECT
 FROM
     employes
 >`
+
+
+-----------------
+
+1. Affichez le nom de la société et le pays des clients qui habitent à Toulouse.
+
+SELECT SOCIETE, PAYS
+FROM clients
+WHERE VILLE="Toulouse"
+
+2. Affichez le nom, prénom et fonction des employés dirigés par l'employé numéro 2.
+
+SELECT NOM, PRENOM, fonction
+FROM employes
+WHERE REND_COMPTE=2
+
+3. Affichez le nom, prénom et fonction des employés qui ne sont pas des représentants.
+
+SELECT
+    NOM, PRENOM, fonction
+FROM
+    employes
+WHERE
+    FONCTION != 'représentant(e)'
+
+4. Affichez le nom, prénom et fonction des employés qui ont un salaire inférieur à 3500.
+
+SELECT
+    NOM, PRENOM, fonction
+FROM
+    employes
+WHERE
+    SALAIRE < 3500
+
+5. Affichez le nom de la société, la ville et le pays des clients qui n'ont pas de fax.
+
+SELECT
+    SOCIETE, VILLE, pays
+FROM
+    clients
+WHERE
+    fax = ''
+
+6. Affichez le nom, prénom et la fonction des employés qui n'ont pas de supérieur.
+
+SELECT
+    NOM, PRENOM, FONCTION
+FROM
+    employes
+WHERE
+    NO_EMPLOYE != REND_COMPTE
+
+--------------------------
+
+1. Trier les employés par nom de salarié en ordre décroissant
+
+SELECT
+    *
+FROM
+    employes
+ORDER BY NOM DESC
+
+2. Trier les clients par pays.
+
+SELECT
+    *
+FROM
+    clients
+ORDER BY PAYS
+
+3. Trier les clients par pays et par ville.
+
+SELECT
+    *
+FROM
+    clients
+ORDER BY PAYS, VILLE
