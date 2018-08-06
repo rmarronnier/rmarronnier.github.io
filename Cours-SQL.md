@@ -6,7 +6,7 @@ Une SGBD met à disposition un Langage de Définition des Données et un Langage
 
 SELECT [DISTINCT ou ALL]* ou liste de colonnes
 
-FROM nom de table ou de la voluptateWHERE prédicats
+FROM nom de table ou de la voluptate
 
 [WHERE prédicats]
 
