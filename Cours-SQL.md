@@ -277,3 +277,38 @@ FROM
     COUNT(DISTINCT(employes.FONCTION)) AS 'Nombre de fonctions'
 FROM
     employes
+
+    -------------------
+
+    1. Ecrivez la requête qui permet d'afficher la masse salariale des employés par fonction.
+
+    SELECT
+    employes.FONCTION,
+    (IFNULL(employes.SALAIRE, 0) + IFNULL(employes.commission, 0)) AS 'masse salariale'
+FROM
+    employes
+GROUP BY employes.FONCTION
+
+    2. Affichez le numéro de commande de celles qui comportent plus de 5 références de produit.
+
+    SELECT
+    NO_COMMANDE, COUNT(1)
+FROM
+    details_commandes
+GROUP BY NO_COMMANDE
+HAVING COUNT(1) > 5;
+
+    3. Afficher la valeur des produits en stock et la valeur des produits commandés par fournisseur, pour les fournisseurs qui ont un numéro compris entre 3 et6.
+
+    SELECT
+    NO_FOURNISSEUR,
+    (produits.PRIX_UNITAIRE * produits.QUANTITE) AS 'valeur DES PRODUITS EN STOCK',
+    SUM(produits.PRIX_UNITAIRE * produits.UNITES_COMMANDEES) AS 'Valeur des produits commandés'
+FROM
+    produits
+WHERE
+    produits.NO_FOURNISSEUR BETWEEN 3 AND 6
+GROUP BY produits.NO_FOURNISSEUR
+
+
+-------------------------------
