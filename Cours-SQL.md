@@ -221,3 +221,27 @@ WHERE
         clients ON clients.CODE_CLIENT = commandes.CODE_CLIENT
     WHERE
         clients.VILLE = 'Paris'
+
+
+        5. Affichez le nom des produits et le nom des fournisseurs pour les produits des catégories 1, 4 et 7.
+
+        SELECT
+    produits.NOM_PRODUIT,
+    fournisseurs.SOCIETE,
+    produits.CODE_CATEGORIE
+FROM
+    produits
+        INNER JOIN
+    fournisseurs ON produits.NO_FOURNISSEUR = fournisseurs.NO_FOURNISSEUR
+WHERE
+    produits.CODE_CATEGORIE IN (1,4,7)
+
+    6. Affichez la liste des employés ainsi que le nom de leur supérieur hiérarchique
+
+    SELECT
+    CONCAT(T1.NOM,' ',T1.PRENOM) AS esclaves,
+    CONCAT(T2.NOM,' ',T2.PRENOM) AS MAITRES
+FROM
+    employes as t1
+        LEFT JOIN
+    employes AS t2 ON t2.NO_EMPLOYE = t1.REND_COMPTE
