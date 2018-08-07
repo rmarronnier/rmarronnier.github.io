@@ -245,3 +245,35 @@ FROM
     employes as t1
         LEFT JOIN
     employes AS t2 ON t2.NO_EMPLOYE = t1.REND_COMPTE
+
+
+    --------------------
+
+    1. Affichez la somme des salaires et des commissions des employés.
+
+    SELECT
+        SUM(employes.SALAIRE + employes.COMMISSION) AS 'SOMME TOTALE SALAIRE + COMMISSIONS'
+    FROM
+        employes
+
+    2. Affichez la moyenne des salaires et des commissions des employés.
+
+    SELECT
+    AVG(employes.SALAIRE + employes.COMMISSION) AS 'MOYENNE SALAIRE + COMMISSIONS'
+FROM
+    employes
+
+    3. Affichez le salaire maximum et la plus petite commission des employés.
+
+    SELECT
+    MAX(employes.SALAIRE) AS 'SALAIRE MAX',
+	MIN(employes.COMMISSION) AS 'COMMISSION MINIMUM'
+FROM
+    employes
+
+    4. Affichez le nombre distinct de fonction.
+
+    SELECT
+    COUNT(DISTINCT(employes.FONCTION)) AS 'Nombre de fonctions'
+FROM
+    employes
