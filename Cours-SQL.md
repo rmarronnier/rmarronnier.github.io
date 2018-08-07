@@ -36,7 +36,7 @@ SELECT NOM_CATEGORIE
 FROM categories
 
 
-3. Affichez les noms, prénoms et date de naissance et la commission (à0 si pas de commission) de tous les employés de la société
+3. Affichez les noms, prénoms et date de naissance et la commission (à 0 si pas de commission) de tous les employés de la société
 
 SELECT NOM,PRENOM,DATE_NAISSANCE,IFNULL(COMMISSION,0)
 FROM employes
@@ -181,13 +181,43 @@ FROM
         produits.NOM_PRODUIT,
         fournisseurs.SOCIETE,
         categories.NOM_CATEGORIE,
-        produits.QUANTITE
-    FROM
-        produits,
-    INNER JOIN fournisseur
-    ON produit.NO_FOURNISSEUR = fournisseur.NO_FOURNISSEUR
-    INNER JOIN categorie
+        QUANTITE,
+        categories.CODE_CATEGORIE, fournisseurs.NO_FOURNISSEUR
+    FROM  produits,
+    INNER JOIN fournisseurs ON fournisseurs.NO_FOURNISSEUR = produits.NO_FOURNISSEUR
+    INNER JOIN categories
     ON produit.code_categorie = categorie.code_categorie
 
 
-    3. Affichez le nom du produit, le le nom du fournisseur, le nom de la catégorie et les quantités des produits qui ont le numéro fournisseur entre 1 et 3 ou un code catégorie entre 1 et 3, et pour lesquelles les quantités sont données en boîtes ou en cartons.
+    3. Affichez le nom du produit, le nom du fournisseur, le nom de la catégorie et les quantités des produits qui ont le numéro fournisseur entre 1 et 3 ou un code catégorie entre 1 et 3, et pour lesquelles les quantités sont données en boîtes ou en cartons.
+
+    SELECT
+    produits.NOM_PRODUIT,
+    fournisseurs.SOCIETE,
+    categories.NOM_CATEGORIE,
+    produits.QUANTITE
+FROM
+    produits
+        INNER JOIN
+    fournisseurs ON fournisseurs.NO_FOURNISSEUR = produits.NO_FOURNISSEUR
+        INNER JOIN
+    categories ON categories.CODE_CATEGORIE = produits.CODE_CATEGORIE
+WHERE
+    1 < produits.NO_FOURNISSEUR < 3 AND
+
+
+    4. Ecrivez la requête qui permet d'afficher le nom des employés qui ont effectué au moins une vente pour un client parisien.
+
+    SELECT
+        employes.NOM,
+        commandes.NO_EMPLOYE,
+        clients.CODE_CLIENT,
+        clients.VILLE
+    FROM
+        employes
+            INNER JOIN
+        commandes ON commandes.NO_EMPLOYE = employes.NO_EMPLOYE
+            INNER JOIN
+        clients ON clients.CODE_CLIENT = commandes.CODE_CLIENT
+    WHERE
+        clients.VILLE = 'Paris'
