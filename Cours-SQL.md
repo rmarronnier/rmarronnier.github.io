@@ -312,3 +312,58 @@ GROUP BY produits.NO_FOURNISSEUR
 
 
 -------------------------------
+1. Affichez la société, adresse et ville de résidence pour tous les tiers de l'entreprise.
+
+SELECT
+    ADRESSE, SOCIETE, VILLE
+FROM
+    clients
+UNION SELECT
+    SOCIETE, ADRESSE, VILLE
+FROM
+    fournisseurs
+
+2. Affichez toutes les commandes qui comportent en même temps des produits de catégorie 1 du fournisseur 1 et des produits de catégorie 2 du fournisseur 2
+
+where exist
+
+3. Affichez la liste des produits que les clients parisiens ne commandent pas.
+
+----------------------------
+
+
+1. Affichez tous les produits pour lesquels la quantité en stock est inférieure à la moyenne des quantités en STOCK
+
+SELECT
+    produits.NOM_PRODUIT, produits.UNITES_STOCK
+FROM
+    produits
+WHERE
+    produits.UNITES_STOCK < (SELECT
+            AVG(produits.UNITES_STOCK)
+        FROM
+            produits)
+
+2. Affichez toutes les commandes pour lesquelles les frais de ports dépassent la moyenne des frais de ports pour ce client.
+
+SELECT
+    commandes.NO_COMMANDE, commandes.PORT
+FROM
+    commandes
+WHERE
+    commandes.port > (SELECT
+            AVG(commandes.PORT)
+        FROM
+            commandes)
+
+3. Affichez les produits pour lesquels la quantité en stock est supérieure à la quantité en stock de chacun des produits de catégorie 3.
+
+FROM
+    produits
+WHERE
+    produits.UNITES_STOCK > (SELECT
+            MAX(produits.UNITES_STOCK)
+        FROM
+            produits
+        WHERE
+            produits.CODE_CATEGORIE = 3)
